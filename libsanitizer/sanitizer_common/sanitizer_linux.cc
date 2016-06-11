@@ -703,6 +703,8 @@ bool ThreadLister::GetDirectoryEntries() {
 uptr GetPageSize() {
 #if SANITIZER_LINUX && (defined(__x86_64__) || defined(__i386__))
   return EXEC_PAGESIZE;
+#elif defined(__mips__) && SANITIZER_UCLIBC
+  return 4096;
 #else
   return sysconf(_SC_PAGESIZE);  // EXEC_PAGESIZE may not be trustworthy.
 #endif
