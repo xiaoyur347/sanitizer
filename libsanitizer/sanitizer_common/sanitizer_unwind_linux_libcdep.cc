@@ -109,6 +109,7 @@ _Unwind_Reason_Code Unwind_Trace(struct _Unwind_Context *ctx, void *param) {
 void BufferedStackTrace::SlowUnwindStack(uptr pc, u32 max_depth) {
   CHECK_GE(max_depth, 2);
   size = 0;
+#if !(defined(__mips__) && SANITIZER_UCLIBC)
   UnwindTraceArg arg = {this, Min(max_depth + 1, kStackTraceMax)};
   _Unwind_Backtrace(Unwind_Trace, &arg);
   // We need to pop a few frames so that pc is on top.
@@ -123,6 +124,7 @@ void BufferedStackTrace::SlowUnwindStack(uptr pc, u32 max_depth) {
     to_pop = 1;
   PopStackFrames(to_pop);
   trace_buffer[0] = pc;
+#endif
 }
 
 void BufferedStackTrace::SlowUnwindStackWithContext(uptr pc, void *context,

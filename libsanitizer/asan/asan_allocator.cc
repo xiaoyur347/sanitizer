@@ -660,10 +660,15 @@ uptr AsanChunkView::AllocTid() { return chunk_->alloc_tid; }
 uptr AsanChunkView::FreeTid() { return chunk_->free_tid; }
 
 static StackTrace GetStackTraceFromId(u32 id) {
+#if !(defined(__mips__) && SANITIZER_UCLIBC)
   CHECK(id);
   StackTrace res = StackDepotGet(id);
   CHECK(res.trace);
   return res;
+#else
+  StackTrace res;
+  return res;
+#endif
 }
 
 StackTrace AsanChunkView::GetAllocStack() {
