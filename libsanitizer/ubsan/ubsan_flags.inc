@@ -15,7 +15,7 @@
 // UBSAN_FLAG(Type, Name, DefaultValue, Description)
 // See COMMON_FLAG in sanitizer_flags.inc for more details.
 
-UBSAN_FLAG(bool, halt_on_error, false,
+UBSAN_FLAG(bool, halt_on_error, true,
            "Crash the program after printing the first error report")
 UBSAN_FLAG(bool, print_stacktrace, false,
            "Include full stacktrace into an error report")

@@ -74,7 +74,7 @@ ASAN_FLAG(bool, check_malloc_usable_size, true,
 ASAN_FLAG(bool, unmap_shadow_on_exit, false,
           "If set, explicitly unmaps the (huge) shadow at exit.")
 ASAN_FLAG(bool, protect_shadow_gap, true, "If set, mprotect the shadow gap")
-ASAN_FLAG(bool, print_stats, false,
+ASAN_FLAG(bool, print_stats, true,
           "Print various statistics after printing an error message or if "
           "atexit=1.")
 ASAN_FLAG(bool, print_legend, true, "Print the legend for the shadow bytes.")

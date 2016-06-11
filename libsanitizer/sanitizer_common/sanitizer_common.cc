@@ -143,7 +143,8 @@ void NORETURN Die() {
   }
   if (common_flags()->abort_on_error)
     Abort();
-  internal__exit(common_flags()->exitcode);
+  //internal__exit(common_flags()->exitcode);
+  Abort();
 }
 
 static CheckFailedCallbackType CheckFailedCallback;
