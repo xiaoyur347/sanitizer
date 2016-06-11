@@ -32,10 +32,14 @@ along with GCC; see the file COPYING3.  If not see
   LINUX_OR_ANDROID_LD (GNU_USER_TARGET_LINK_SPEC,			\
 		       GNU_USER_TARGET_LINK_SPEC " " ANDROID_LINK_SPEC)
 
+#undef  ASAN_CC1_SPEC
+#define ASAN_CC1_SPEC "%{%:sanitize(address):-fasynchronous-unwind-tables}"
+
 #undef  SUBTARGET_CC1_SPEC
 #define SUBTARGET_CC1_SPEC						\
-  LINUX_OR_ANDROID_CC (GNU_USER_TARGET_CC1_SPEC,			\
-		       GNU_USER_TARGET_CC1_SPEC " " ANDROID_CC1_SPEC)
+  LINUX_OR_ANDROID_CC (GNU_USER_TARGET_CC1_SPEC " " ASAN_CC1_SPEC,	\
+		       GNU_USER_TARGET_CC1_SPEC " " ASAN_CC1_SPEC " "	\
+		       ANDROID_CC1_SPEC)
 
 #undef  CC1PLUS_SPEC
 #define CC1PLUS_SPEC							\

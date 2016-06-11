@@ -19668,6 +19668,12 @@ mips_expand_vi_general (machine_mode vmode, machine_mode imode,
   emit_move_insn (target, mem);
 }
 
+static unsigned HOST_WIDE_INT
+mips_asan_shadow_offset (void)
+{
+  return (unsigned HOST_WIDE_INT) 0x0aaa0000;
+}
+
 /* Expand a vector initialization.  */
 
 void
@@ -20207,6 +20213,9 @@ mips_promote_function_mode (const_tree type ATTRIBUTE_UNUSED,
 
 #undef TARGET_CASE_VALUES_THRESHOLD
 #define TARGET_CASE_VALUES_THRESHOLD mips_case_values_threshold
+
+#undef TARGET_ASAN_SHADOW_OFFSET
+#define TARGET_ASAN_SHADOW_OFFSET mips_asan_shadow_offset
 
 #undef TARGET_ATOMIC_ASSIGN_EXPAND_FENV
 #define TARGET_ATOMIC_ASSIGN_EXPAND_FENV mips_atomic_assign_expand_fenv
