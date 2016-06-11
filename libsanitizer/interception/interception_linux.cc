@@ -22,7 +22,7 @@ bool GetRealFunctionAddress(const char *func_name, uptr *func_addr,
   return real == wrapper;
 }
 
-#if !defined(__ANDROID__)  // android does not have dlvsym
+#if !defined(__ANDROID__) && !defined(__UCLIBC__) // android does not have dlvsym
 void *GetFuncAddrVer(const char *func_name, const char *ver) {
   return dlvsym(RTLD_NEXT, func_name, ver);
 }

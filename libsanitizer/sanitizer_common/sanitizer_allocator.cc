@@ -18,7 +18,7 @@ namespace __sanitizer {
 
 // ThreadSanitizer for Go uses libc malloc/free.
 #if defined(SANITIZER_GO) || defined(SANITIZER_USE_MALLOC)
-# if SANITIZER_LINUX && !SANITIZER_ANDROID
+# if SANITIZER_LINUX && !SANITIZER_ANDROID && !SANITIZER_UCLIBC
 extern "C" void *__libc_malloc(uptr size);
 extern "C" void __libc_free(void *ptr);
 #  define LIBC_MALLOC __libc_malloc

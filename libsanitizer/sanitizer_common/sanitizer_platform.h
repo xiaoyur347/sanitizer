@@ -59,6 +59,13 @@
 # define SANITIZER_ANDROID 0
 #endif
 
+#include <features.h> //for uclibc
+#if defined(__UCLIBC__)
+# define SANITIZER_UCLIBC  1
+#else
+# define SANITIZER_UCLIBC  0
+#endif
+
 #define SANITIZER_POSIX (SANITIZER_FREEBSD || SANITIZER_LINUX || SANITIZER_MAC)
 
 #if __LP64__ || defined(_WIN64)
